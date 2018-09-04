@@ -35,43 +35,11 @@ class SearchView extends Component {
     }
   };
 
-  handleSearch = () => {
+  handleSearch = e => {
     const url =
       (this.searchElement.current && this.searchElement.current.value) ||
       config.initial;
-
-    this.props.fetchTracks();
-
-    if (url) {
-      try {
-        // const FETCH_URL = `${config.resolveUri}/?client_id=${
-        //   config.client_id
-        // }&url=${config.initial}`;
-        // const resolveRequest = new Request(FETCH_URL, {
-        //   method: "GET",
-        //   mode: "cors",
-        //   cache: "no-cache",
-        //   headers: {
-        //     "Content-Type": "application/json; charset=utf-8"
-        //   },
-        //   redirect: "follow", // manual, *follow, error
-        //   referrer: "no-referrer" // no-referrer, *client
-        // });
-        // this.setState({
-        //   loading: true
-        // });
-        // fetch(resolveRequest)
-        //   .then(response => response.json())
-        //   .then(data => this._onResolveResponse(data))
-        //   .catch(error => {
-        //     throw new Error(error);
-        //   });
-      } catch (error) {
-        throw new Error(error);
-      }
-    }
-
-    return false;
+    this.props.fetchTrackStart(url);
   };
 
   render() {
@@ -97,7 +65,7 @@ class SearchView extends Component {
             className={classes.searchButton}
             color="primary"
             variant="raised"
-            onClick={e => this.handleSearch()}
+            onClick={e => this.handleSearch(e)}
           >
             Search
           </Button>
@@ -113,6 +81,7 @@ class SearchView extends Component {
 
 const styles = {
   flexContainer: {
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start"
@@ -123,13 +92,14 @@ const styles = {
   },
   searchField: {
     marginLeft: 15,
-    marginRight: 15
+    marginRight: 15,
+    maxWidth: 500
   }
 };
 
 SearchView.propTypes = {
   classes: PropTypes.object.isRequired,
-  fetchTracks: PropTypes.func.isRequired
+  fetchTrackStart: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SearchView);

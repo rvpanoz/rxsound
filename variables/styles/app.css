@@ -1,0 +1,31 @@
+.search-box {
+  transition: all ease-in-out 0.3s;
+  width: 30%;
+  z-index: 2;
+  margin: 15px;
+  padding: 10px 20px;
+  border: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  &:focus,
+  &.active {
+    width: 80%;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    outline: none;
+    ~ .search-content {
+      height: 100vh;
+      width: 100%;
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.8);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      backdrop-filter: saturate(180%) blur(20px);
+    }
+  }
+  &:valid {
+    ~ .search-content {
+      .search-result {
+        opacity: 1;
+      }
+    }
+  }
+}

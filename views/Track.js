@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-class TracksList extends Component {
+class Track extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    return <span>List tracks</span>;
+    return <span>Track card</span>;
   }
 }
 
-export default TracksList;
+export default Track;

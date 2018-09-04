@@ -20,10 +20,10 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import styles from "../variables/styles/mainLayoutStyle";
 
 //components
-import { Search, TracksList, WithFetch } from "../views";
+import { Search, Track, WithFetch } from "../views";
 
 //actions
-import { addFilter, fetchTracksStart } from "../actions";
+import { addFilter, fetchTrackStart } from "../actions";
 
 const drawerWidth = 240;
 
@@ -40,12 +40,8 @@ class MainLayout extends React.Component {
     this.setState({ drawerOpen: false });
   };
 
-  componentDidMount() {
-    // this.props.ping();
-  }
-
   render() {
-    const { classes, theme, fetchTracks, tracks } = this.props;
+    const { classes, theme, fetchTrackStart } = this.props;
 
     return (
       <div className={classes.root}>
@@ -96,16 +92,16 @@ class MainLayout extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Grid container justify="space-between">
-            <Grid xs={4} item>
-              <Search fetchTracks={this.props.fetchTracks} />
-            </Grid>
+          <Grid container justify="space-between" spacing={24}>
             <Grid xs={6} item>
-              <WithFetch
-                render={() => <TracksList tracks={tracks} />}
-                action={() => fetchTracks()}
-              />
+              <Search fetchTrackStart={fetchTrackStart} />
             </Grid>
+            {/* <Grid xs={6} item>
+              <WithFetch
+                render={() => <Track />}
+                fetchHandler={() => fetchTrack()}
+              />
+            </Grid> */}
           </Grid>
         </main>
       </div>
@@ -121,7 +117,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addFilter: (name, value) => dispatch(addFilter(name, value)),
-  fetchTracks: () => dispatch(fetchTracksStart())
+  fetchTrackStart: url => dispatch(fetchTrackStart(url))
 });
 
 MainLayout.propTypes = {

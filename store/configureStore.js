@@ -1,10 +1,9 @@
 import { createStore, compose, applyMiddleware } from "redux";
-// import thunkMiddleware from "redux-thunk";
 import { createEpicMiddleware } from "redux-observable";
 import rootReducer from "../reducers";
 import initialState from "./initialState";
 
-import { rootEpic } from "../actions";
+import { rootEpic } from "../epics";
 
 const epicMiddleware = createEpicMiddleware();
 
